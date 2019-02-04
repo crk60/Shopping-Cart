@@ -38,8 +38,22 @@ x = 1
 
 
 
-while x < 5:
+""" while x < 5:
    y = input("Please input a product id: ")
    print(y)
    print(x)
-   x = x + 1
+   x = x + 1 """
+
+running_total = 0
+
+
+while x < 5:
+    selected_id = 1 #input("Please select a product id (1-20)")
+    matching_products = [p for p in products if p["id"] == selected_id]
+    product = matching_products[0]
+    price = product["price"] #4.95
+    running_total = running_total + price
+    x = x + 1
+
+
+print("THE TOTAL PRICE IS: " + str(running_total))
