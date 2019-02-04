@@ -43,17 +43,17 @@ def to_usd(myprice):
 #I was confused as to how the input function actually worked so I looked here
 #https://www.w3schools.com/python/ref_func_input.asp
 
-x = input("Enter a ID Code")
-print('This is the ID you selected ' + x)
+#x = input("Enter a ID Code")
+#print('This is the ID you selected ' + x)
+
+selected_ids = []
 
 while True:
-    selected_id = input("Please select a product id (1-20)")
-    matching_products = [p for p in products if p["id"] == selected_id]
-    product = matching_products[0]
-    price = product["price"] #4.95
-    running_total = running_total + price
-    x = x + 1
-
+    selected_id = input("Please input a product identifier: ") #> "9" (string)
+    if selected_id == "DONE":
+        break
+    else:
+        selected_ids.append(selected_id)
 
 
 #Begin Reciept:
@@ -77,8 +77,16 @@ x = 1
 
 running_total = 0
 
+# I got really confused on the last bit from class - I thought we were setting up the input section. I had to reference the screencast to figure out that we were in fact building out the final list, and there is a whole other "while" function for inputs. 
+# After referencing the screencast I moved our code to the below "for" loop and tried to recreat the while loop in the input section
 
+print("SELECTED PRODUCTS:")
 
+for selected_id in selected_ids:
+      matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+      matching_product = matching_products[0]
+      subtotal_price = subtotal_price + matching_product["price"]
+print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
 
 
