@@ -24,18 +24,36 @@ products = [
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 # TODO: write some Python code here to produce the desired functionality...
-print(products)
 
-# x = 1 # our counter variable
 
-# x = 2 + 1 #> 3
 
-# x = x + 1 #> 4
 
 #Set up stuff is up here
 import datetime as dt
 checkout_start = dt.datetime.now()
-tax = 0.06 #washington DC has sucky taxes
+taxr = 0.06 #washington DC has sucky taxes
+
+#Pricing formatting found on github repository / from groceries exercise
+
+def to_usd(myprice):
+    return "${0:,.2f}".format(myprice)
+
+#Input Section
+
+#I was confused as to how the input function actually worked so I looked here
+#https://www.w3schools.com/python/ref_func_input.asp
+
+x = input("Enter a ID Code")
+print('This is the ID you selected ' + x)
+
+while True:
+    selected_id = input("Please select a product id (1-20)")
+    matching_products = [p for p in products if p["id"] == selected_id]
+    product = matching_products[0]
+    price = product["price"] #4.95
+    running_total = running_total + price
+    x = x + 1
+
 
 
 #Begin Reciept:
@@ -64,13 +82,6 @@ running_total = 0
 
 
 
-while x < 5:
-    selected_id = 1 #input("Please select a product id (1-20)")
-    matching_products = [p for p in products if p["id"] == selected_id]
-    product = matching_products[0]
-    price = product["price"] #4.95
-    running_total = running_total + price
-    x = x + 1
 
 
 print("THE TOTAL PRICE IS: " + str(running_total))
