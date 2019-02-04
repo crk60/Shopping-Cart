@@ -32,8 +32,10 @@ print(products)
 
 # x = x + 1 #> 4
 
-
-
+import datetime
+t = datetime.datetime.now()
+print(t)
+print("STARTED AT:" + t)
 x = 1
 
 
@@ -45,6 +47,11 @@ x = 1
    x = x + 1 """
 
 running_total = 0
+
+#not sure where to go from here
+
+b = 1
+
 
 
 while x < 5:
