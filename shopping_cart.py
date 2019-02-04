@@ -32,10 +32,9 @@ print(products)
 
 # x = x + 1 #> 4
 
-import datetime
-t = datetime.datetime.now()
-print(t)
-print("STARTED AT:" + t)
+import datetime as dt
+checkout_start = dt.datetime.now()
+print("STARTED AT:" + checkout_start.strftime("%Y-%m-%d %I:%M %p"))
 x = 1
 
 
@@ -50,7 +49,7 @@ running_total = 0
 
 #not sure where to go from here
 
-b = 1
+
 
 
 
