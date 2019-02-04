@@ -32,9 +32,21 @@ print(products)
 
 # x = x + 1 #> 4
 
+#Set up stuff is up here
 import datetime as dt
 checkout_start = dt.datetime.now()
-print("STARTED AT:" + checkout_start.strftime("%Y-%m-%d %I:%M %p"))
+tax = 0.06 #washington DC has sucky taxes
+
+
+#Begin Reciept:
+
+print("~~~~~~~~~~~~~~~~~")
+print("Lushious Legumes Grocery")
+print("www.lushiouslegumes.com")
+print("~~~~~~~~~~~~~~~~~")
+print("CHECKOUT AT:" + checkout_start.strftime("%Y-%m-%d %I:%M %p"))
+
+
 x = 1
 
 
@@ -47,7 +59,6 @@ x = 1
 
 running_total = 0
 
-#not sure where to go from here
 
 
 
