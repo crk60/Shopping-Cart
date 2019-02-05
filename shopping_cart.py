@@ -107,9 +107,8 @@ print("SELECTED PRODUCTS:")
 for selected_id in selected_ids:
       matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
       matching_product = matching_products[0]
-      fetch_price = matching_product["price"]
-      subtotal_price = subtotal_price + fetch_price
-print(" ... " + matching_product["name"] + " (" + to_usd(fetch_price) + ")")
+      subtotal_price = subtotal_price + matching_product["price"]
+      print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
 
 
@@ -127,8 +126,8 @@ print("THE TOTAL PRICE IS: " + str(subtotal_price))
 
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("Subtotal: " + to_usd(subtotal_price))
-print('Tax: ' + to_usd(totaltax))
-print('Total: ' + to_usd(totalprice))
+print('Tax: ' + to_usd(total_tax))
+print('Total: ' + to_usd(total_price))
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("See you again real soon!") 
 
@@ -139,11 +138,4 @@ print("See you again real soon!")
   #  return "${0:,.2f}".format(z)
 #TypeError: unsupported format string passed to list.__format__
 
-'''print("---------------------------------")
-print("SUBTOTAL: " + to_usd(subtotal_price))
-print("TAX: " + to_usd(total_tax))
-print("TOTAL: " + to_usd(total_price))
-print("---------------------------------")
-print("THANKS, SEE YOU AGAIN SOON!")
-print("---------------------------------")'''
 
