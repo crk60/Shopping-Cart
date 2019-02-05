@@ -1,4 +1,5 @@
 # shopping_cart.py
+# I was having a lot of errors tying to get my code to work so I tried to copy and paste the answer key to see if it would 
 
 import datetime as dt
 

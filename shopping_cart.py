@@ -32,7 +32,7 @@ products = [
 import datetime as dt
 checkout_start = dt.datetime.now()
 #TypeError: can't multiply sequence by non-int of type 'float'
-taxr = int(0.06) #washington DC has sucky taxes
+taxr = 0.06 #washington DC has sucky taxes
 
 
 
@@ -72,8 +72,11 @@ x = 1
 # same issue as  matching items variable: will try subtotal_price [0]
 #https://www.learnpython.org/en/Variables_and_Types
 
-subtotal_price = [0]
+subtotal_price = 0
 
+#******* The above code was the reason everything kept messing up. A core variable (subtotal_price) needed to be defined, and ina cursory google search I thought it needed to be defined as [0]. 
+# The issue with this is that defined subtotal_price as a list, and every equation where it was integrated it should have been an integer and there were countless format or invalid syntax errors
+# After messaging Hiep I finally found the error and the rest of my code worked!
 
 
 # File "shopping_cart.py", line 94, in <module>
@@ -104,9 +107,9 @@ print("SELECTED PRODUCTS:")
 for selected_id in selected_ids:
       matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
       matching_product = matching_products[0]
-      fetch_price = [matching_product["price"]]
+      fetch_price = matching_product["price"]
       subtotal_price = subtotal_price + fetch_price
-print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
+print(" ... " + matching_product["name"] + " (" + to_usd(fetch_price) + ")")
 
 
 
@@ -115,19 +118,20 @@ print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price
 
 total_tax = subtotal_price * taxr
 
-totalprice = subtotal_price + total_tax
+total_price = subtotal_price + total_tax
 
 
 #Result Print Out
 
 print("THE TOTAL PRICE IS: " + str(subtotal_price))
 
-""" print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("Subtotal: " + to_usd(subtotal_price))
 print('Tax: ' + to_usd(totaltax))
 print('Total: ' + to_usd(totalprice))
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-print("See you again real soon!") """
+print("See you again real soon!") 
+
 #Kept getting this error with the above code
 #  File "shopping_cart.py", line 123, in <module>
 #    print("Subtotal: " + to_usd(subtotal_price))
@@ -135,11 +139,11 @@ print("See you again real soon!") """
   #  return "${0:,.2f}".format(z)
 #TypeError: unsupported format string passed to list.__format__
 
-print("---------------------------------")
+'''print("---------------------------------")
 print("SUBTOTAL: " + to_usd(subtotal_price))
 print("TAX: " + to_usd(total_tax))
 print("TOTAL: " + to_usd(total_price))
 print("---------------------------------")
 print("THANKS, SEE YOU AGAIN SOON!")
-print("---------------------------------")
+print("---------------------------------")'''
 
