@@ -33,10 +33,7 @@ import datetime as dt
 checkout_start = dt.datetime.now()
 taxr = 0.06 #washington DC has sucky taxes
 
-#Pricing formatting found on github repository / from groceries exercise
 
-def to_usd(myprice):
-    return "${0:,.2f}".format(myprice)
 
 #Input Section
 
@@ -67,7 +64,20 @@ print("CHECKOUT AT:" + checkout_start.strftime("%Y-%m-%d %I:%M %p"))
 
 x = 1
 
+#  Error recieved in Anaconda prompt:
+# File "shopping_cart.py", line 88, in <module>
+ #   subtotal_price = subtotal_price + matching_product["price"]
+#NameError: name 'subtotal_price' is not defined
+# same issue as  matching items variable: will try subtotal_price [0]
+#https://www.learnpython.org/en/Variables_and_Types
 
+subtotal_price = [0]
+
+
+
+# File "shopping_cart.py", line 94, in <module>
+ #   subtotal_price = subtotal_price + matching_product["price"]
+#TypeError: can only concatenate list (not "float") to list
 
 """ while x < 5:
    y = input("Please input a product id: ")
@@ -80,12 +90,22 @@ running_total = 0
 # I got really confused on the last bit from class - I thought we were setting up the input section. I had to reference the screencast to figure out that we were in fact building out the final list, and there is a whole other "while" function for inputs. 
 # After referencing the screencast I moved our code to the below "for" loop and tried to recreat the while loop in the input section
 
+#Pricing formatting found on github repository / from groceries exercise
+
+def to_usd(anyprice):
+    return "${0:,.2f}".format(anyprice)
+
+
+#Error Recieved:TypeError: can only concatenate list (not “float”) to list
+# https://stackoverflow.com/questions/19286023/typeerror-can-only-concatenate-list-not-float-to-list
+
 print("SELECTED PRODUCTS:")
 
 for selected_id in selected_ids:
       matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
       matching_product = matching_products[0]
-      subtotal_price = subtotal_price + matching_product["price"]
+      fetch_price = [matching_product["price"]]
+      subtotal_price = subtotal_price + fetch_price
 print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
 
