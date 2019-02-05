@@ -1,5 +1,9 @@
 # shopping_cart.py
 
+import datetime as dt
+
+TAX_RATE = 0.06 # Washington, DC sales tax rate (constant)
+
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -23,27 +27,12 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-# TODO: write some Python code here to produce the desired functionality...
+#
+# INFO CAPTURE / INPUT
+#
 
-
-
-
-#Set up stuff is up here
-import datetime as dt
-checkout_start = dt.datetime.now()
-#TypeError: can't multiply sequence by non-int of type 'float'
-taxr = int(0.06) #washington DC has sucky taxes
-
-
-
-#Input Section
-
-#I was confused as to how the input function actually worked so I looked here
-#https://www.w3schools.com/python/ref_func_input.asp
-
-#x = input("Enter a ID Code")
-#print('This is the ID you selected ' + x)
-
+checkout_start_at = dt.datetime.now() # current date and time, see: https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/modules/datetime.md
+subtotal_price = 0
 selected_ids = []
 
 while True:
@@ -53,93 +42,38 @@ while True:
     else:
         selected_ids.append(selected_id)
 
+#
+# INFO DISPLAY / OUTPUT
+#
 
-#Begin Reciept:
+print("---------------------------------")
+print("GREEN FOODS GROCERY")
+print("WWW.GREEN-FOODS-GROCERY.COM")
+print("---------------------------------")
+print("CHECKOUT AT: " + checkout_start_at.strftime("%Y-%m-%d %I:%M %p")) # datetime formatting, see: https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
+print("---------------------------------")
 
-print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-print("Lushious Legumes Grocery")
-print("www.lushiouslegumes.com")
-print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-print("CHECKOUT AT:" + checkout_start.strftime("%Y-%m-%d %I:%M %p"))
-
-
-x = 1
-
-#  Error recieved in Anaconda prompt:
-# File "shopping_cart.py", line 88, in <module>
- #   subtotal_price = subtotal_price + matching_product["price"]
-#NameError: name 'subtotal_price' is not defined
-# same issue as  matching items variable: will try subtotal_price [0]
-#https://www.learnpython.org/en/Variables_and_Types
-
-subtotal_price = [0]
-
-
-
-# File "shopping_cart.py", line 94, in <module>
- #   subtotal_price = subtotal_price + matching_product["price"]
-#TypeError: can only concatenate list (not "float") to list
-
-""" while x < 5:
-   y = input("Please input a product id: ")
-   print(y)
-   print(x)
-   x = x + 1 """
-
-
-
-# I got really confused on the last bit from class - I thought we were setting up the input section. I had to reference the screencast to figure out that we were in fact building out the final list, and there is a whole other "while" function for inputs. 
-# After referencing the screencast I moved our code to the below "for" loop and tried to recreat the while loop in the input section
-
-#Pricing formatting found on github repository / from groceries exercise
-
+# utility function to convert float or integer to usd-formatted string (for printing)
+# see: https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/datatypes/numbers.md
 def to_usd(my_price):
     return "${0:,.2f}".format(my_price)
-
-#Error Recieved:TypeError: can only concatenate list (not “float”) to list
-# https://stackoverflow.com/questions/19286023/typeerror-can-only-concatenate-list-not-float-to-list
 
 print("SELECTED PRODUCTS:")
 
 for selected_id in selected_ids:
       matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
       matching_product = matching_products[0]
-      fetch_price = [matching_product["price"]]
-      subtotal_price = subtotal_price + fetch_price
-print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
+      subtotal_price = subtotal_price + matching_product["price"]
+      print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
+tax = subtotal_price * TAX_RATE
 
-
-
-#Final Equations
-
-total_tax = subtotal_price * taxr
-
-totalprice = subtotal_price + total_tax
-
-
-#Result Print Out
-
-print("THE TOTAL PRICE IS: " + str(subtotal_price))
-
-""" print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-print("Subtotal: " + to_usd(subtotal_price))
-print('Tax: ' + to_usd(totaltax))
-print('Total: ' + to_usd(totalprice))
-print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-print("See you again real soon!") """
-#Kept getting this error with the above code
-#  File "shopping_cart.py", line 123, in <module>
-#    print("Subtotal: " + to_usd(subtotal_price))
- # File "shopping_cart.py", line 97, in to_usd
-  #  return "${0:,.2f}".format(z)
-#TypeError: unsupported format string passed to list.__format__
+total_price = subtotal_price + tax
 
 print("---------------------------------")
 print("SUBTOTAL: " + to_usd(subtotal_price))
-print("TAX: " + to_usd(total_tax))
+print("TAX: " + to_usd(tax))
 print("TOTAL: " + to_usd(total_price))
 print("---------------------------------")
 print("THANKS, SEE YOU AGAIN SOON!")
 print("---------------------------------")
-
