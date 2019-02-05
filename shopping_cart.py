@@ -47,7 +47,7 @@ taxr = 0.06 #washington DC has sucky taxes
 selected_ids = []
 
 while True:
-    selected_id = input("Please input a product identifier: ") #> "9" (string)
+    selected_id = input("Please input a product id between 1 and 20, or type DONE when finished: ") #> "9" (string)
     if selected_id == "DONE":
         break
     else:
@@ -57,8 +57,11 @@ while True:
 #Begin Reciept:
 
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-print("Lushious Legumes Grocery")
-print("www.lushiouslegumes.com")
+print("CVS Pharmacy")
+print("1411 York Road")
+print("Jamison, PA 18929")
+print("1-800-CVS-CARE")
+print("www.cvs.com")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("CHECKOUT AT:" + checkout_start.strftime("%Y-%m-%d %I:%M %p"))
 
@@ -121,14 +124,15 @@ total_price = subtotal_price + total_tax
 
 
 #Result Print Out
-
+print(" ")
 print("THE TOTAL PRICE IS: " + str(subtotal_price))
-
+print(" ")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("Subtotal: " + to_usd(subtotal_price))
 print('Tax: ' + to_usd(total_tax))
 print('Total: ' + to_usd(total_price))
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print(" ")
 print("See you again real soon!") 
 
 #Kept getting this error with the above code
@@ -139,3 +143,28 @@ print("See you again real soon!")
 #TypeError: unsupported format string passed to list.__format__
 
 
+#Further:
+# I worked at CVS all through high school and I thought it was hilarious that the reciept printed a ton of coupons for items you just bought
+# I wanted to write a code so that the reciept will print out a coupon for each item bought!
+
+#https://www.pythoncentral.io/how-to-generate-a-random-number-in-python/
+import random
+
+
+
+
+expiration_date = dt.datetime.now() + dt.timedelta(days = 10)
+
+
+for selected_id in selected_ids:
+      matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+      matching_product = matching_products[0]
+      discount = random.choice([10, 15, 20, 25, 30])
+      print(' ')
+      print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+      print(' ')
+      print("Congratulations! You've recieved " + str(discount) + "% off your next purchase of:")
+      print(' ')
+      print("        " + matching_product["name"]  )
+      print(' ')
+      print("Come on back to CVS by " + expiration_date.strftime("%m-%d-%Y %M:%p %I") + " to redeem it!")
